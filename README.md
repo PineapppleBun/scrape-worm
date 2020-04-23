@@ -1,1 +1,1 @@
-# worm-scraper
+# scrape-worm
