@@ -7,4 +7,5 @@ divc = doc.find('div', attrs = {'class': 'entry-content'})
 
 for link in divc.find_all('a'): 
     print(link.get('href')) 
+    print('whatever')
 
