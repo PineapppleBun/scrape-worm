@@ -1,17 +1,17 @@
-import requests, bs4, lxml
+import requests, bs4, lxml, time
 
 #Function to seperate content div and extract text
 
 def get_text(link):
     page = requests.get(link)
-    doc = bs4.BeautifulSoup(page.content, 'html')
+    doc = bs4.BeautifulSoup(page.content, 'lxml')
     divc = doc.find('div', attrs = {'class': 'entry-content'})
     for p in divc.find_all('p'):
         print(p.get_text(),"\n")
 
 url = "https://parahumans.wordpress.com/table-of-contents/"
 page = requests.get(url)
-doc = bs4.BeautifulSoup(page.content, 'html')
+doc = bs4.BeautifulSoup(page.content, 'lxml')
 divc = doc.find('div', attrs = {'class': 'entry-content'})
 links = []
 
@@ -25,3 +25,4 @@ for link in divc.find_all('a'):
 
 for link in links:
     get_text(link)
+    time.sleep(2)
