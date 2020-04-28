@@ -1,7 +1,8 @@
 import requests, bs4, lxml, time
 
-#Function to seperate content div and extract and print text for individual page
+url = "https://parahumans.wordpress.com/category/stories-arcs-1-10/arc-1-gestation/1-01/"
 
+#Function to extract page content and grab link for next chapter
 def get_page(link):
     request = requests.get(link)
     page_html = bs4.BeautifulSoup(request.content, 'lxml')
@@ -11,9 +12,10 @@ def get_page(link):
     for paragraph in page_content.find_all('p'):
         if paragraph.a == None:
             print(paragraph.get_text(),"\n")
+    page_link = page_html.find('a', attrs = {'title': 'Next Chapter'})
+    url = page_link.get('href')
+    print(url)
 
-url = "https://parahumans.wordpress.com/category/stories-arcs-1-10/arc-1-gestation/1-01/"
+for i in range(0,2):
+	get_page(url)
 
-links = []
-
-get_page(url)
