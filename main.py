@@ -7,7 +7,7 @@ def get_page(link):
     request = requests.get(link)
     page_html = bs4.BeautifulSoup(request.content, 'lxml')
     page_header = page_html.find('h1', attrs = {'class': 'entry-title'})
-    print("-----------------NEXT CHAPTER-----------------\n",page_header.get_text(),"\n")
+    print(page_header.get_text(),"\n")
     page_content = page_html.find('div', attrs = {'class': 'entry-content'})
     for paragraph in page_content.find_all('p'):
         if paragraph.a == None:
